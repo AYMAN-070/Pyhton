@@ -6,7 +6,7 @@
 #    By: ayman <ayman@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/27 12:31:53 by ayman             #+#    #+#              #
-#    Updated: 2025/12/27 14:01:33 by ayman            ###   ########.fr        #
+#    Updated: 2025/12/27 20:16:36 by ayman            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ def water_plants(plant_list):
         if i == len(plant_list):
             print("Watering completed successfully!\n")
         else:
-            print("\nCleanup always happens, even with errors!") 
+            print("Cleanup always happens, even with errors!") 
         
 def test_watering_system():
     print("=== Garden Watering system ===")
