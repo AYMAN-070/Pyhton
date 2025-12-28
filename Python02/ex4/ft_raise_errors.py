@@ -6,13 +6,13 @@
 #    By: ayman <ayman@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/27 14:12:36 by ayman             #+#    #+#              #
-#    Updated: 2025/12/27 15:36:00 by ayman            ###   ########.fr        #
+#    Updated: 2025/12/28 12:11:05 by ayman            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 def check_plant_health(plant_name, water_level, sunlight_hours):
     try:
-        if not isinstance(plant_name, str) or len(plant_name) < 1:
+        if not isinstance(plant_name, str) or plant_name == "":
             raise ValueError("Error: Plant name cannot be empty!\n")
         if water_level < 1:
             raise ValueError(f"Error: Water level {water_level} is too low (min 1)\n")

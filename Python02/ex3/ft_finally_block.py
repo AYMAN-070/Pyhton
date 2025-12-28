@@ -6,7 +6,7 @@
 #    By: ayman <ayman@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/27 12:31:53 by ayman             #+#    #+#              #
-#    Updated: 2025/12/27 20:16:36 by ayman            ###   ########.fr        #
+#    Updated: 2025/12/28 12:26:44 by ayman            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,14 +15,14 @@ def water_plants(plant_list):
     i = 0
     try:
         for plant in plant_list:
-            if not isinstance(plant, str) or len(plant) < 1:
+            if not isinstance(plant, str) or plant == "":
                 raise ValueError
             print("watering ", plant)
             i += 1
     except ValueError:
         print("Error: Cannot water None - invalid plant!")
     finally:
-        print("Closing watering system (cleanup)")
+        print("Closing watering system (cleanup)\n")
         if i == len(plant_list):
             print("Watering completed successfully!\n")
         else:
@@ -30,6 +30,7 @@ def water_plants(plant_list):
         
 def test_watering_system():
     print("=== Garden Watering system ===")
+    print()
     print("Testing normal watering...")
     plant_list = ["tomato", "lettuce", "carrots"]
     water_plants(plant_list)
