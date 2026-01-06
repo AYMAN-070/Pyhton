@@ -1,14 +1,14 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    ft_finally_block.py                                :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ayman <ayman@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/12/27 12:31:53 by ayman             #+#    #+#              #
-#    Updated: 2025/12/28 12:26:44 by ayman            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+# *************************************************************************** #
+#                                                                             #
+#                                                         :::      ::::::::   #
+#    ft_finally_block.py                                :+:      :+:    :+:   #
+#                                                     +:+ +:+         +:+     #
+#    By: ayhammou <ayhammou@student.42lyon.fr>      +#+  +:+       +#+        #
+#                                                 +#+#+#+#+#+   +#+           #
+#    Created: 2025/12/27 12:31:53 by ayman             #+#    #+#             #
+#    Updated: 2026/01/06 15:28:16 by ayhammou         ###   ########.fr       #
+#                                                                             #
+# *************************************************************************** #
 
 def water_plants(plant_list):
     print("Opening watering system")
@@ -26,8 +26,9 @@ def water_plants(plant_list):
         if i == len(plant_list):
             print("Watering completed successfully!\n")
         else:
-            print("Cleanup always happens, even with errors!") 
-        
+            print("Cleanup always happens, even with errors!")
+
+
 def test_watering_system():
     print("=== Garden Watering system ===")
     print()
@@ -37,6 +38,7 @@ def test_watering_system():
     print("Testing with error...")
     plant_list = ["tomato", ""]
     water_plants(plant_list)
+
 
 if __name__ == "__main__":
     test_watering_system()

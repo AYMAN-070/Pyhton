@@ -1,26 +1,31 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    ft_inventory_system.py                             :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ayman <ayman@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/12/29 14:41:32 by ayman             #+#    #+#              #
-#    Updated: 2025/12/29 18:20:58 by ayman            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+# ************************************************************************** #
+#                                                                            #
+#                                                         :::      ::::::::  #
+#    ft_inventory_system.py                             :+:      :+:    :+:  #
+#                                                     +:+ +:+         +:+    #
+#    By: ayhammou <ayhammou@student.42lyon.fr>      +#+  +:+       +#+       #
+#                                                 +#+#+#+#+#+   +#+          #
+#    Created: 2025/12/29 14:41:32 by ayman             #+#    #+#            #
+#    Updated: 2026/01/06 15:44:09 by ayhammou         ###   ########.fr      #
+#                                                                            #
+# ************************************************************************** #
 
 if __name__ == "__main__":
     inevntaire = {
-        "sword": {"type": "weapon", "rarity": "rare", "quantity": 1, "price": 500},
-        "potion": {"type": "consumable", "rarity": "common", "quantity": 5, "price": 50},
-        "shield": {"type": "armor", "rarity": "uncommon", "quantity": 1, "price": 200},
+        "sword": {"type": "weapon", "rarity": "rare", "quantity": 1,
+                  "price": 500},
+        "potion": {"type": "consumable", "rarity": "common", "quantity": 5,
+                   "price": 50},
+        "shield": {"type": "armor", "rarity": "uncommon", "quantity": 1,
+                   "price": 200},
     }
     print("=== Player Inventory System ===")
     print()
     print("=== Alice's Inventory ===")
     for name, items in inevntaire.items():
-        print(f"{name} ({items['type']}, {items['rarity']}): {items['quantity']}x @ {items['price']} gold each = {items['price'] * items['quantity']} gold")
+        print(f"{name} ({items['type']}, {items['rarity']}): "
+              f"{items['quantity']}x @ {items['price']} gold each = "
+              f"{items['price'] * items['quantity']} gold")
     print()
     value = 0
     for items in inevntaire.values():
@@ -35,7 +40,7 @@ if __name__ == "__main__":
         tp = x["type"]
         qty = x["quantity"]
         categories[tp] = categories.get(tp, 0) + qty
-    display =[]
+    display = []
     for x, y in categories.items():
         display.append(f"{x}({y})")
     print(f"Categories: {', '.join(display)}")
@@ -71,15 +76,10 @@ if __name__ == "__main__":
     else:
         print(f"Most items: Alice ({bob_quantity} items)")
     rare_item = []
-    for name, details in  inevntaire.items():
+    for name, details in inevntaire.items():
         if details["rarity"] == 'rare':
             rare_item.append(name)
-    for name, details in  bob_inventaire.items():
+    for name, details in bob_inventaire.items():
         if details["rarity"] == 'rare':
             rare_item.append(name)
     print(f"Rarest items: {', '.join(rare_item)}")
-        
-        
-    
-    
-    

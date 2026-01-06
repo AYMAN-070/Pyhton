@@ -1,14 +1,14 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    ft_data_stream.py                                  :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ayman <ayman@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/12/30 12:19:33 by ayman             #+#    #+#              #
-#    Updated: 2025/12/30 17:10:08 by ayman            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+# *************************************************************************** #
+#                                                                             #
+#                                                         :::      ::::::::   #
+#    ft_data_stream.py                                  :+:      :+:    :+:   #
+#                                                     +:+ +:+         +:+     #
+#    By: ayhammou <ayhammou@student.42lyon.fr>      +#+  +:+       +#+        #
+#                                                 +#+#+#+#+#+   +#+           #
+#    Created: 2025/12/30 12:19:33 by ayman             #+#    #+#             #
+#    Updated: 2026/01/06 15:44:29 by ayhammou         ###   ########.fr       #
+#                                                                             #
+# *************************************************************************** #
 
 def game_generator(count):
     name = ["Alice", "Bob", "Charlie"]
@@ -18,8 +18,10 @@ def game_generator(count):
         actual_name = name[i % (len(name))]
         actual_action = actions[i % len(actions)]
         actual_level = (i * 3) % 20 + 1
-        inventaire = {"id": i, "player": actual_name, "level": actual_level, "action": actual_action,}
+        inventaire = {"id": i, "player": actual_name, "level": actual_level,
+                      "action": actual_action, }
         yield inventaire
+
 
 if __name__ == "__main__":
     print("=== Game Data Stream Processor ===")
@@ -33,7 +35,8 @@ if __name__ == "__main__":
     for event in game_generator(1000):
         total = total + 1
         if event["id"] < 3:
-            print(f"Event {event['id']} Player {event['player']} (level {event['level']}) {event['action']}")
+            print(f"Event {event['id']} Player {event['player']} (level "
+                  f"{event['level']}) {event['action']}")
         if event["id"] == 3:
             print("...")
         if event["level"] > 10:
@@ -53,6 +56,7 @@ if __name__ == "__main__":
     print("Processing time: 0.045 seconds")
     print()
     print("=== Generator Demonstration ===")
+
     def fibonacci(count):
         x = 0
         y = 1
@@ -66,28 +70,29 @@ if __name__ == "__main__":
     for i in fibonacci(10):
         stock.append(str(i))
     print(f"Fibonacci sequence (first 10): {', '.join(stock)}")
-    
+
     def is_prime(num):
         if num < 2:
             return False
         a = 2
         while a <= num:
             if a == num:
-                return  True
+                return True
             if num % a == 0:
                 return False
             a += 1
             if a == num:
-                return  True
+                return True
+
     def prime_numbers(count):
         found = 0
         number = 2
         while found < count:
-            if is_prime(number) == True:
+            if is_prime(number) is True:
                 yield number
                 found += 1
             number += 1
-            
+
     prime = []
     for i in prime_numbers(5):
         prime.append(str(i))

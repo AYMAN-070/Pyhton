@@ -1,26 +1,31 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    ft_plant_growth.py                                 :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ayman <ayman@student.42.fr>                +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/12/22 15:37:28 by ayman             #+#    #+#              #
-#    Updated: 2025/12/22 15:57:16 by ayman            ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+# *************************************************************************** #
+#                                                                             #
+#                                                         :::      ::::::::   #
+#    ft_plant_growth.py                                 :+:      :+:    :+:   #
+#                                                     +:+ +:+         +:+     #
+#    By: ayhammou <ayhammou@student.42lyon.fr>      +#+  +:+       +#+        #
+#                                                 +#+#+#+#+#+   +#+           #
+#    Created: 2025/12/22 15:37:28 by ayman             #+#    #+#             #
+#    Updated: 2026/01/06 13:18:39 by ayhammou         ###   ########.fr       #
+#                                                                             #
+# *************************************************************************** #
 
 class Plant:
     def __init__(self, name, height, age):
         self.name = name
         self.height = height
         self.age = age
+
     def grow(self, cm):
         self.height = self.height + cm
+
     def get_older(self, days):
         self.age = self.age + days
+
     def get_info(self):
         return f"{self.name}: {self.height}cm, {self.age} days old"
+
+
 if __name__ == "__main__":
     print("Day 1 ===")
     p1 = Plant("Rose", 25, 30)
