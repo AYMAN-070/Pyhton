@@ -26,6 +26,9 @@ class DataStream(ABC):
                     None) -> List[Any]:
         return data_batch
 
+    def get_stats(self) -> Dict[str, Union[str, int, float]]:
+        return {'stream_id': self.stream_id}
+
 
 class SensorStream(DataStream):
     def process_batch(self, data_batch: List[Any]) -> str:
