@@ -31,4 +31,3 @@ class Card(ABC):
             return True
         else:
             return False
-    

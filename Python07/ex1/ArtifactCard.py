@@ -20,7 +20,7 @@ class ArtifactCard(Card):
         self.durability = durability
         self.effect = effect
 
-    def play(self, game_state):
+    def play(self, game_state: dict):
         return {'card_played': self.name, 'mana_used': self.cost,
                 'effect': self.effect}
 
