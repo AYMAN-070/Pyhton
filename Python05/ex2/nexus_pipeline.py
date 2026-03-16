@@ -15,24 +15,32 @@ from typing import Any, List, Dict, Optional, Protocol
 
 
 class ProcessingStage(Protocol):
+    """Structural interface (Protocol) for pipeline stages."""
     def process(self, data: Any) -> Any:
+        """Process data and return the result for the next stage."""
         pass
 
 
 class ProcessingPipeline(ABC):
+    """Abstract Base Class for data pipelines."""
     def __init__(self):
+        """Initializes the pipeline with an empty list of stages."""
         self.stages_list: List[ProcessingStage] = []
 
     def add_stage(self, stage: ProcessingStage):
+        """Adds a processing stage to the pipeline sequence."""
         self.stages_list.append(stage)
 
     @abstractmethod
     def process(self, data: Any) -> Any:
+        """Abstract method to execute the pipeline logic."""
         pass
 
 
 class InputStage:
+    """Stage responsible for raw data ingestion and initial parsing."""
     def process(self, data: Any) -> Dict:
+        """Identifies data format and returns a structured dictionary."""
         if data is None:
             return {}
         if isinstance(data, dict):
@@ -53,8 +61,10 @@ class InputStage:
             return {"stream": str(data)}
 
 
-class Transformstage:
+class TransformStage:
+    """Stage responsible for data enrichment and transformation logic."""
     def process(self, data: Any) -> Dict:
+        """Applies domain-specific transformations based on data content."""
         if data is None:
             return {}
         check_Json = False
@@ -114,7 +124,9 @@ class Transformstage:
 
 
 class OutputStage:
+    """Stage responsible for final formatting and delivery."""
     def process(self, data: Any) -> str:
+        """Formats the final dictionary into a human-readable string."""
         if "value" in data and "Validation" in data:
             return (f"Output: Processed temperature reading: {data['value']}"
                     f"°C ({data['Validation']})")
@@ -127,15 +139,17 @@ class OutputStage:
 
 
 class JSONAdapter(ProcessingPipeline):
+    """Pipeline adapter specialized for JSON formatted data."""
     def __init__(self, pipelin_id: str):
         super().__init__()
         self.pipeline_id = pipelin_id
         self.silent = False
         self.add_stage(InputStage())
-        self.add_stage(Transformstage())
+        self.add_stage(TransformStage())
         self.add_stage(OutputStage())
 
     def process(self, data: Any) -> str:
+        """Executes the pipeline with JSON formatting logs."""
         if self.silent is False:
             print("Processing JSON data through pipeline...")
             print("Input: ", data)
@@ -148,15 +162,17 @@ class JSONAdapter(ProcessingPipeline):
 
 
 class CSVAdapter (ProcessingPipeline):
+    """Pipeline adapter specialized for CVS formatted data."""
     def __init__(self, pipelin_id: str):
         super().__init__()
         self.pipeline_id = pipelin_id
         self.silent = False
         self.add_stage(InputStage())
-        self.add_stage(Transformstage())
+        self.add_stage(TransformStage())
         self.add_stage(OutputStage())
 
     def process(self, data: Any) -> str:
+        """Executes the pipeline with CVS formatting logs."""
         if self.silent is False:
             print("Processing CSV data through same pipeline...")
             print("Input: ", data)
@@ -169,15 +185,17 @@ class CSVAdapter (ProcessingPipeline):
 
 
 class StreamAdapter (ProcessingPipeline):
+    """Pipeline adapter specialized for Stream formatted data."""
     def __init__(self, pipelin_id: str):
         super().__init__()
         self.pipeline_id = pipelin_id
         self.silent = False
         self.add_stage(InputStage())
-        self.add_stage(Transformstage())
+        self.add_stage(TransformStage())
         self.add_stage(OutputStage())
 
     def process(self, data: Any) -> str:
+        """Executes the pipeline with STream formatting logs."""
         if self.silent is False:
             print("Processing Stream data through same pipeline...")
             print("Input: Real-time sensor stream")
@@ -190,15 +208,19 @@ class StreamAdapter (ProcessingPipeline):
 
 
 class NexusManager:
+    """Global orchestrator managing multiple polymorphic pipelines."""
     def __init__(self):
+        """Initializes the Nexus Manager with an empty registry."""
         self.pipelines: List[ProcessingPipeline] = []
 
     def add_pipeline(self, pipeline: ProcessingPipeline):
+        """Adds a pipeline to the manager's execution registry."""
         self.pipelines.append(pipeline)
 
     def process_data(self, data: Any, pipeline_index: int) -> Optional[Any]:
+        """Processes data through a specific pipeline with error recovery."""
         try:
-            if pipeline_index == 1000:
+            if pipeline_index > 2:
                 raise ValueError("Invalid data format")
             selected_pipeline = self.pipelines[pipeline_index]
             return selected_pipeline.process(data)

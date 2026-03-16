@@ -10,7 +10,8 @@
 #                                                                             #
 # *************************************************************************** #
 
-def garden_operation(function):
+def garden_operation(function: str) -> None:
+    """Simulates various common Python errors in a garden context."""
     if function == "ValueError":
         int("abc")
     elif function == "ZeroDivisionError":
@@ -22,7 +23,8 @@ def garden_operation(function):
         dict["rien"]
 
 
-def test_error_types():
+def test_error_types() -> None:
+    """Tests and catches different types of exceptions."""
     print("=== Garden Error Types Demo ===")
     print()
     print("Testing ValueError...")

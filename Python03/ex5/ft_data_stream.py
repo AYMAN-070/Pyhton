@@ -10,7 +10,11 @@
 #                                                                             #
 # *************************************************************************** #
 
-def game_generator(count):
+from typing import Generator, Any
+
+
+def game_generator(count: int) -> Generator[dict[str, Any], None, None]:
+    """Generates a stream of simulated game event dictionaries."""
     name = ["Alice", "Bob", "Charlie"]
     actions = ["killed monster", "found treasure", "leveled up"]
     inventaire = {}
@@ -23,7 +27,8 @@ def game_generator(count):
         yield inventaire
 
 
-if __name__ == "__main__":
+def stream_wizard() -> None:
+    """Main function to demonstrate the stream processing and generators."""
     print("=== Game Data Stream Processor ===")
     print()
     print("Processing 1000 game events...")
@@ -57,21 +62,22 @@ if __name__ == "__main__":
     print()
     print("=== Generator Demonstration ===")
 
-    def fibonacci(count):
-        x = 0
-        y = 1
-        tmp = 0
-        for i in range(count):
-            yield x
-            tmp = x
-            x = y
-            y = tmp + y
-    stock = []
-    for i in fibonacci(10):
-        stock.append(str(i))
-    print(f"Fibonacci sequence (first 10): {', '.join(stock)}")
 
-    def is_prime(num):
+def fibonacci(count: int) -> Generator[int, None, None]:
+    """Generates the Fibonacci sequence up to count elements."""
+    x = 0
+    y = 1
+    tmp = 0
+    for i in range(count):
+        yield x
+        tmp = x
+        x = y
+        y = tmp + y
+
+
+def prime_numbers(count: int) -> Generator[int, None, None]:
+    """Generates the first 'count' prime numbers."""
+    def is_prime(num: int) -> bool:
         if num < 2:
             return False
         a = 2
@@ -83,16 +89,21 @@ if __name__ == "__main__":
             a += 1
             if a == num:
                 return True
+    found = 0
+    number = 2
+    while found < count:
+        if is_prime(number) is True:
+            yield number
+            found += 1
+        number += 1
 
-    def prime_numbers(count):
-        found = 0
-        number = 2
-        while found < count:
-            if is_prime(number) is True:
-                yield number
-                found += 1
-            number += 1
 
+if __name__ == "__main__":
+    stream_wizard()
+    stock = []
+    for i in fibonacci(10):
+        stock.append(str(i))
+    print(f"Fibonacci sequence (first 10): {', '.join(stock)}")
     prime = []
     for i in prime_numbers(5):
         prime.append(str(i))

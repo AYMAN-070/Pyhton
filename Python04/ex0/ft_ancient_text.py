@@ -10,19 +10,26 @@
 #                                                                             #
 # ****************************************************************************#
 
-if __name__ == "__main__":
+def recover_ancient_text(filename: str) -> None:
+    """
+    Recover data from the ancient storage vault.
+    Type hints included as per Protocol V.2.
+    """
     print("=== CYBER ARCHIVES - DATA RECOVERY SYSTEM ===")
     print()
-    print("Accessing Storage Vault: ancient_fragment.txt")
+    print("Accessing Storage Vault:", filename)
     try:
-        file = open("ancient_fragment.txt", "r")
-        print("Connection established...")
-        print()
-        print("RECOVERED DATA:")
-        content = file.read()
-        print(content)
-        file.close()
+        with open(filename, "r") as file:
+            print("Connection established...")
+            print()
+            print("RECOVERED DATA:")
+            content = file.read()
+            print(content)
         print()
         print("Data recovery complete. Storage unit disconnected.")
     except FileNotFoundError:
         print("ERROR: Storage vault not found. Run data generator first.")
+
+
+if __name__ == "__main__":
+    recover_ancient_text("ancient_fragment.txt")

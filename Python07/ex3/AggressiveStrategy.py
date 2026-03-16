@@ -16,8 +16,10 @@ from ex1.SpellCard import SpellCard
 
 
 class AggressiveStrategy(GameStrategy):
+    """A strategy that prioritizes low-cost cards and maximum damage output"""
 
     def execute_turn(self, hand: list, battlefield: list) -> dict:
+        """Plays as many cards as possible starting from the lowest cost"""
         mana = 5
         cards_played = []
         damage = 0
@@ -39,4 +41,5 @@ class AggressiveStrategy(GameStrategy):
         return "AgressiveStrategy"
 
     def prioritize_targets(self, available_targets: list) -> list:
+        """Always targets the enemy player directly for maximum aggression"""
         return ["Enemy Player"]

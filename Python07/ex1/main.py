@@ -22,13 +22,13 @@ if __name__ == "__main__":
     creature_card = CreatureCard("Fire_dragon", 5, "Legendary", 7, 5)
     artifact = ArtifactCard("Mana Crystal", 4, "Rare", 3,
                             "Prmanent: +1 mana per turn")
-    spell = SpellCard("Lightning Bolt", 3, "Legendaray",
+    spell = SpellCard("Lightning Bolt", 3, "Legendary",
                       "Deal 3 damage to target")
     deck = Deck()
     deck.add_card(creature_card)
     deck.add_card(spell)
     deck.add_card(artifact)
-    print(deck.get_deck_stats())
+    print("Deck stats:", deck.get_deck_stats())
     print()
     print("Drawing and playing cards:")
     print()

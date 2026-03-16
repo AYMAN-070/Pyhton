@@ -10,7 +10,10 @@
 #                                                                             #
 # *************************************************************************** #
 
-def check_temperature(temp_str):
+def check_temperature(temp_str: str) -> int | None:
+    """
+    Validates if a string input is a valid agricultural temperature.
+    """
     try:
         total = int(temp_str)
         print(f"Testing temperature: {temp_str}")
@@ -26,7 +29,10 @@ def check_temperature(temp_str):
         print(f"Error: {temp_str} is not a valid number\n")
 
 
-def test_temperature_input():
+def test_temperature_input() -> None:
+    """
+    Demonstrates the temperature validation pipeline with various scenarios.
+    """
     check_temperature("25")
     check_temperature("abc")
     check_temperature("100")
@@ -35,3 +41,4 @@ def test_temperature_input():
 
 if __name__ == "__main__":
     test_temperature_input()
+    print("All tests completed - program didn't crash!")

@@ -13,6 +13,7 @@
 import sys
 if __name__ == "__main__":
     print("=== Player Score Analytics ===")
+    """Analyzes player scores from command line arguments."""
     score_list = []
     i = 1
     if len(sys.argv) == 1:

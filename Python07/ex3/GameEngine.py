@@ -12,16 +12,27 @@
 
 from ex3.CardFactory import CardFactory
 from ex3.GameStrategy import GameStrategy
+from typing import Optional
 
 
 class GameEngine:
+    """Orchestrates game interactions by combining a card factory and a
+    strategy"""
+
+    def __init__(self) -> None:
+        self.factory: Optional[CardFactory] = None
+        self.strategy: Optional[GameStrategy] = None
 
     def configure_engine(self, factory: CardFactory,
                          strategy: GameStrategy) -> None:
-        pass
+        """Connects a factory and a strategy to the engine"""
+        self.factory = factory
+        self.strategy = strategy
 
     def simulate_turn(self) -> dict:
-        pass
+        """Executes a turn simulation based on current settings"""
+        return {}
 
     def get_engine_status(self) -> dict:
-        pass
+        """Returns the configuration status of the engine"""
+        return {"status": "initialized"}

@@ -10,7 +10,8 @@
 #                                                                             #
 # *************************************************************************** #
 
-if __name__ == "__main__":
+def run_analytics_dashboard() -> None:
+    """Analyzes game data using List, Dict, and Set comprehensions."""
     print("=== Game Analytics Dashboard ===")
     print()
     list_scores = [2300, 1800, 2150, 2050, 1500, 500]
@@ -35,17 +36,11 @@ if __name__ == "__main__":
 
     print("=== Dict Comprehension Examples ===")
     scores = {name: data["score"] for name, data in dict_player.items()}
-    high = 0
-    medium = 0
-    low = 0
-    for x in list_scores:
-        if x >= 2000:
-            high += 1
-        if x >= 1000 and x < 2000:
-            medium += 1
-        if x >= 0 and x < 1000:
-            low += 1
-    categories = {"high": high, "medium": medium, "low": low}
+    categories = {
+        "high": len([x for x in list_scores if x >= 2000]),
+        "medium": len([x for x in list_scores if 1000 <= x < 2000]),
+        "low": len([x for x in list_scores if x < 1000])
+        }
     count = {x: y["achievements"] for x, y in dict_player.items()}
     print("Player scores :", scores)
     print("Score categories:", categories)
@@ -62,10 +57,10 @@ if __name__ == "__main__":
     print()
 
     print("=== Combined Analysis ===")
-    print("TOtal unique player: ", len(unique_players))
-    print("TOtal unique achievements: ", len(unique_achievements))
+    print("Total unique player: ", len(unique_players))
+    print("Total unique achievements: ", len(unique_achievements))
     average = sum(list_scores) / len(list_scores)
-    print("Average score: ", average)
+    print(f"Average score: {average:.2f}")
     top_score = max(list_scores)
     top_player = [name for name, data in dict_player.items()
                   if data["score"] == top_score]
@@ -74,3 +69,7 @@ if __name__ == "__main__":
                                  if name == top_player[0]]
     print(f"Top performer: {top_player[0]} ({top_score} points, "
           f"{top_performer_achievement[0]} achievements)")
+
+
+if __name__ == "__main__":
+    run_analytics_dashboard()

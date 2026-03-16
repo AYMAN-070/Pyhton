@@ -15,22 +15,28 @@ from typing import Any, List, Union
 
 
 class DataProcessor(ABC):
+    """Base abstract class for all Nexus data processors."""
     @abstractmethod
     def process(self, data: Any) -> str:
+        """Process the input data and return a statistical summary."""
         pass
 
     @abstractmethod
     def validate(self, data: Any) -> bool:
+        """Validate if the data is suitable for this processor."""
         pass
 
     def format_output(self, result: str) -> str:
+        """Provide a default implementation for formatting output."""
         return f"Output: {result}"
 
 
 class NumericProcessor(DataProcessor):
+    """Processor specialized for list of numbers."""
     processor_name = "Numeric Processor"
 
     def process(self, data: Any) -> str:
+        """Calculates sum and average of numeric data."""
         count = 0
         total = 0
         for x in data:
@@ -43,8 +49,9 @@ class NumericProcessor(DataProcessor):
         return f"Processed {count} numeric values, sum={total}, avg={average}"
 
     def validate(self, data: Any) -> bool:
+        """Checks if data is a list containing only numbers."""
         try:
-            if isinstance(data, list) is False:
+            if not isinstance(data, list):
                 raise ValueError
             for x in data:
                 if isinstance(x, (int, float)) is False:
@@ -56,9 +63,11 @@ class NumericProcessor(DataProcessor):
 
 
 class TextProcessor(DataProcessor):
+    """Processor specialized for strings."""
     processor_name = "Text Processor"
 
     def process(self, data: Any) -> str:
+        """Counts characters and words in a string."""
         num_chars = 0
         for x in data:
             num_chars += 1
@@ -74,8 +83,9 @@ class TextProcessor(DataProcessor):
         return f"Processed text: {num_chars} characters, {num_words} words"
 
     def validate(self, data: Any) -> bool:
+        """Checks if data is a string."""
         try:
-            if isinstance(data, str) is False:
+            if not isinstance(data, str):
                 raise ValueError
             print("Validation: Text data verified")
             return True
@@ -84,12 +94,14 @@ class TextProcessor(DataProcessor):
 
 
 class LogProcessor(DataProcessor):
+    """Processor specialized for log-formatted strings (Level: Message)."""
     processor_name = "Log Processor"
 
     def process(self, data: Any) -> str:
-        len = 0
+        """Parses log level and message."""
+        data_len = 0
         for char in data:
-            len += 1
+            data_len += 1
         i = 0
         for x in data:
             if x != ":":
@@ -97,14 +109,15 @@ class LogProcessor(DataProcessor):
             if x == ":":
                 break
         if data[0:5] == "ERROR":
-            return f"[ALERT] {data[0:i]} level detected:{data[i+1:len]}"
+            return f"[ALERT] {data[0:i]} level detected:{data[i+1:data_len]}"
         elif data[0:4] == "INFO":
-            return f"[INFO] {data[0:i]}:{data[i+1:len]}"
+            return f"[INFO] {data[0:i]}:{data[i+1:data_len]}"
         else:
-            return f"{data[0:i]} level detected:{data[i+1:len]}"
+            return f"{data[0:i]} level detected:{data[i+1:data_len]}"
 
     def validate(self, data: Any) -> bool:
-        if isinstance(data, str) is False:
+        """Verifies if the string contains a colon for log parsing."""
+        if not isinstance(data, str):
             return False
         check = False
         for x in data:

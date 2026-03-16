@@ -10,22 +10,32 @@
 #                                                                             #
 # ****************************************************************************#
 
-if __name__ == "__main__":
+def create_archive(filename: str) -> None:
+    """Establishes a new preservation protocol by creating fresh archive
+    entries."""
     print("=== CYBER ARCHIVES - PRESERVATION SYSTEM ===")
     print()
-    print("Initializing new storage unit: new_discovery.txt")
+    print(f"Initializing new storage unit: {filename}")
     print("Storage unit created successfully...")
     print()
-    file = open("new_discovery.txt", "w")
-    file.write("[ ENTRY 001 ] New quantum algorithm discovered\n")
-    file.write("[ ENTRY 002 ] Efficiency increased by 347%\n")
-    file.write("[ ENTRY 003 ] Archived by Data Archivist trainee\n")
-    file.close()
-    print("Inscribing preservation data...")
-    file1 = open("new_discovery.txt", "r")
-    content = file1.read()
-    print(content)
-    print()
-    print("Data inscription complete. Storage unit sealed")
-    print("Archive 'new_discovery.txt' ready for long-term preservation.")
-    file1.close()
+    try:
+        with open(filename, "w") as vault:
+            print("Storage unit created successfully...")
+            print("Inscribing preservation data...")
+            entries = [
+                "[ENTRY 001] New quantum algorithm discovered",
+                "[ENTRY 002] Efficiency increased by 347%",
+                "[ENTRY 003] Archived by Data Archivist trainee"
+                ]
+            for entry in entries:
+                vault.write(entry + "\n")
+                print(entry)
+        print()
+        print("Data inscription complete. Storage unit sealed.")
+        print(f"Archive '{filename}' ready for long-term preservation.")
+    except PermissionError:
+        print("ERROR: Access denied. Security protocols prevent writing here.")
+
+
+if __name__ == "__main__":
+    create_archive("new_discovery.txt")

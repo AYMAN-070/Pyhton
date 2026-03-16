@@ -13,9 +13,10 @@
 if __name__ == "__main__":
     print("=== Welcome to My Garden ===")
     plant = "Rose"
-    height = "25cm"
-    age = "30 days"
+    height = 25
+    age = 30
     print("Plant:", plant)
-    print("Height:", height)
-    print("Age:", age)
+    print(f"Height: {height}cm")
+    print(f"Age: {age} days")
+    print()
     print("=== End of Program ===")

@@ -10,76 +10,74 @@
 #                                                                            #
 # ************************************************************************** #
 
+import sys
+
+
+def inventory_master(argv: list[str]) -> None:
+    """Analyzes game inventory from command line arguments using dictionaries.
+    """
+    print("=== Inventory System Analysis ===")
+    inventory = {}
+    for arg in argv[1:]:
+        try:
+            name, qty = arg.split(":")
+            inventory[name] = int(qty)
+        except ValueError:
+            continue
+    if not inventory:
+        print("No items to analyze.")
+        return
+    total = sum(inventory.values())
+    types = len(inventory)
+    print("Total items in inventory:", total)
+    print("Unique item types:", types)
+    print()
+    print("=== Current Inventory ===")
+    for x, y in inventory.items():
+        percentage = (y / total) * 100
+        print(f"{x}: {y} units ({percentage:.1f}%)")
+    print()
+    print("=== Inventory Statistics ===")
+    max_qty = -1
+    max1 = ""
+    for name, qty in inventory.items():
+        if qty > max_qty:
+            max_qty = qty
+            max1 = name
+    min_qty = 10000
+    min1 = ""
+    for name, qty in inventory.items():
+        if qty < min_qty:
+            min_qty = qty
+            min1 = name
+    print(f"Most abundant: {max1} ({inventory[max1]} units)")
+    print(f"Least abundant: {min1} ({inventory[min1]} units)")
+    print()
+    print("=== Item Categories ===")
+    categories = {"Moderate": {}, "Scarce": {}}
+    restock = []
+    for x, y in inventory.items():
+        if y >= 5:
+            categories["Moderate"][x] = y
+        else:
+            categories["Scarce"][x] = y
+            if y < 2:
+                restock.append(x)
+    print(f"Moderate: {categories['Moderate']}")
+    print(f"Scarce: {categories['Scarce']}")
+    print()
+    print("=== Management Suggestions ===")
+    print("Restock needed:", restock)
+    print()
+    print("=== Dictionary Properties Demo ===")
+    print(f"Dictionary keys: {list(inventory.keys())}")
+    print(f"Dictionary values: {list(inventory.values())}")
+    sword_count = inventory.get("sword", 0)
+    print(f"Sample lookup - 'sword' in inventory: {sword_count > 0}")
+
+
 if __name__ == "__main__":
-    inevntaire = {
-        "sword": {"type": "weapon", "rarity": "rare", "quantity": 1,
-                  "price": 500},
-        "potion": {"type": "consumable", "rarity": "common", "quantity": 5,
-                   "price": 50},
-        "shield": {"type": "armor", "rarity": "uncommon", "quantity": 1,
-                   "price": 200},
-    }
-    print("=== Player Inventory System ===")
-    print()
-    print("=== Alice's Inventory ===")
-    for name, items in inevntaire.items():
-        print(f"{name} ({items['type']}, {items['rarity']}): "
-              f"{items['quantity']}x @ {items['price']} gold each = "
-              f"{items['price'] * items['quantity']} gold")
-    print()
-    value = 0
-    for items in inevntaire.values():
-        value = value + (items["price"] * items["quantity"])
-    print(f"Inventory value: {value} gold")
-    count = 0
-    for items in inevntaire.values():
-        count = count + items["quantity"]
-    print(f"Item count: {count} items")
-    categories = {}
-    for x in inevntaire.values():
-        tp = x["type"]
-        qty = x["quantity"]
-        categories[tp] = categories.get(tp, 0) + qty
-    display = []
-    for x, y in categories.items():
-        display.append(f"{x}({y})")
-    print(f"Categories: {', '.join(display)}")
-    print()
-    print("=== Transaction: Alice gives Bob 2 potions ===")
-    inevntaire["potion"]["quantity"] = inevntaire["potion"]["quantity"] - 2
-    bob_inventaire = {}
-    bob_inventaire["potion"] = inevntaire["potion"].copy()
-    bob_inventaire["potion"]["quantity"] = 2
-    print("Transaction successful !")
-    print()
-    print("=== Updated Inventories ===")
-    print("Alice potion", inevntaire["potion"]["quantity"])
-    print("Bob potion: ", bob_inventaire["potion"]["quantity"])
-    print()
-    print("=== Inventory Analytics ===")
-    alice_value = 0
-    alice_quantity = 0
-    bob_value = 0
-    bob_quantity = 0
-    for item in bob_inventaire.values():
-        bob_value = bob_value + (item["price"] * item["quantity"])
-        bob_quantity += item["quantity"]
-    for item in inevntaire.values():
-        alice_value = alice_value + (item["price"] * item["quantity"])
-        alice_quantity += item["quantity"]
-    if alice_value >= bob_value:
-        print(f"Most valuable player: Alice ({alice_value} gold)")
+    if len(sys.argv) > 1:
+        inventory_master(sys.argv)
     else:
-        print(f"Most valuable player: Alice ({bob_value} gold)")
-    if alice_quantity >= bob_quantity:
-        print(f"Most items: Alice ({alice_quantity} items)")
-    else:
-        print(f"Most items: Alice ({bob_quantity} items)")
-    rare_item = []
-    for name, details in inevntaire.items():
-        if details["rarity"] == 'rare':
-            rare_item.append(name)
-    for name, details in bob_inventaire.items():
-        if details["rarity"] == 'rare':
-            rare_item.append(name)
-    print(f"Rarest items: {', '.join(rare_item)}")
+        print("No arguments provided !")

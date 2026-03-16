@@ -11,14 +11,22 @@
 # ****************************************************************************#
 
 import sys
-if __name__ == "__main__":
+
+
+def manage_streams() -> None:
+    """Accesses the three sacred data channels: stdin, stdout, and stderr.
+    """
     print("=== CYBER ARCHIVES - COMMUNICATION SYSTEM ===")
     print()
-    ids = input("Input Stream active. Enter archivist ID: ")
-    status = input("Input Stream active. Enter status report: ")
-    print("[ STANDARD ] Archive status from", ids, status)
-    print("[ ALERT ] System diagnostic: Communication channels verified",
+    ids: str = input("Input Stream active. Enter archivist ID: ")
+    status: str = input("Input Stream active. Enter status report: ")
+    print(f"[STANDARD] Archive status from {ids}: {status}", file=sys.stdout)
+    print("[ALERT] System diagnostic: Communication channels verified",
           file=sys.stderr)
-    print("[ STANDARD ] Data transmission complete")
+    print("[STANDARD] Data transmission complete", file=sys.stdout)
     print()
     print("Three-channel communication test successful.")
+
+
+if __name__ == "__main__":
+    manage_streams()

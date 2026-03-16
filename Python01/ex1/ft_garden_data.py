@@ -11,14 +11,16 @@
 # *************************************************************************** #
 
 class Plant:
-    def __init__(self, name, height, age):
+    """Blueprint for a garden plant."""
+    def __init__(self, name: str, height: int, age: int) -> None:
+        """Initialize plant attributes with type safety."""
         self.name = name
         self.height = height
         self.age = age
 
 
 if __name__ == "__main__":
-    print("Garden PLant Registry")
+    print("=== Garden PLant Registry ===")
     plant1 = Plant("Rose", 25, 30)
     plant2 = Plant("Sunflower", 80, 45)
     plant3 = Plant("Cactus", 15, 120)

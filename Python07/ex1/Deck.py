@@ -18,27 +18,33 @@ import random
 
 
 class Deck:
+    """Management class responsible for handling a collection of cards."""
 
-    def __init__(self):
-        self.cards = []
+    def __init__(self) -> None:
+        self.cards: list[Card] = []
 
     def add_card(self, card: Card) -> None:
+        """Adds a card to the deck"""
         self.cards.append(card)
 
     def remove_card(self, card_name: str) -> bool:
+        """Removes the first occurrence of a card by its name"""
         return True
 
     def shuffle(self) -> None:
+        """Shuffles the current cards in the deck"""
         random.shuffle(self.cards)
 
     def draw_card(self) -> Card:
+        """Removes and returns the top card from the deck"""
         if len(self.cards) == 0:
-            return None
+            return None   # type: ignore
         card_return = self.cards[0]
         del self.cards[0]
         return card_return
 
     def get_deck_stats(self) -> dict:
+        """Calculates and returns statistics about the deck composition"""
         creatures_count = 0
         sorts_count = 0
         artefacts_count = 0

@@ -14,14 +14,18 @@ from abc import ABC, abstractmethod
 
 
 class Combatable(ABC):
+    """Abstract interface for cards with combat capabilities."""
     @abstractmethod
     def attack(self, target) -> dict:
+        """Executes an attack on a target."""
         pass
 
     @abstractmethod
     def defend(self, incoming_damage: int) -> dict:
+        """Processes incoming damage."""
         pass
 
     @abstractmethod
     def get_combat_stats(self) -> dict:
+        """Returns current combat statistics."""
         pass

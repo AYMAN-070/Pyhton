@@ -11,33 +11,40 @@
 # *************************************************************************** #
 
 class GardenError(Exception):
+    """Base class for all exceptions in this garden module."""
     pass
 
 
 class PlantError(GardenError):
+    """Exception raised for plant-specific issues."""
     pass
 
 
 class WaterError(GardenError):
+    """Exception raised for irrigation-specific issues."""
     pass
 
 
-def test_error():
+def test_error() -> None:
+    """Demonstrates how to raise and catch custom exceptions."""
+    print("=== Custom Garden Errors Demo ===")
+    print()
     print("Testing PlantError...")
     try:
         plant_status = "dead"
         if plant_status == "dead":
             raise PlantError("The tomato plant is wilting!")
     except PlantError as e:
-        print(f"Caught PLantError: {e}")
+        print(f"Caught PlantError: {e}")
+    print()
     print("Testing WaterError...")
     try:
-        Water_status = "Drought"
-        if Water_status == "Drought":
-            raise WaterError("caught WaterError: "
-                             "Not enough water in the tank!")
+        water_status = "Drought"
+        if water_status == "Drought":
+            raise WaterError("Not enough water in the tank!")
     except WaterError as e:
-        print(e)
+        print(f"Caught PlantError: {e}")
+    print()
     print("Testing catching all garden errors...")
     try:
         plant_status = "dead"
@@ -46,12 +53,13 @@ def test_error():
     except GardenError as e:
         print(f"Caught a garden error: {e}")
     try:
-        Water_status = "Drought"
-        if Water_status == "Drought":
-            raise WaterError("caught a garden error: "
-                             "Not enough water in the tank!")
+        water_status = "Drought"
+        if water_status == "Drought":
+            raise WaterError("Not enough water in the tank!")
     except GardenError as e:
-        print(e)
+        print(f"Caught PlantError: {e}")
+    print()
+    print("All custom error types work correctly!")
 
 
 if __name__ == "__main__":

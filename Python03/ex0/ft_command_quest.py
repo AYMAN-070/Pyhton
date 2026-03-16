@@ -12,10 +12,11 @@
 
 import sys
 if __name__ == "__main__":
+    """Processes and displays command line arguments."""
     print("=== Command Quest ===")
     if len(sys.argv) == 1:
         print("No arguments provided!")
-        print("Program name: ", sys.argv[0])
+        print("Program name:", sys.argv[0])
         print("Total arguments: 1")
     if len(sys.argv) > 1:
         print("Program name: ", sys.argv[0])

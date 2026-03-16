@@ -13,6 +13,7 @@
 from ex0.CreatureCard import CreatureCard
 
 if __name__ == "__main__":
+    """Executes the demonstration of the DataDeck card foundation."""
     print("=== DataDeck Card Foundation ===")
     print()
     print("Testing Abstract Base Class Design:")
@@ -24,7 +25,7 @@ if __name__ == "__main__":
     print()
     available_mana = 6
     print(f"Playing Fire Dragon with {available_mana} mana available:")
-    print("Playable:", creature_card.is_playable(6))
+    print("Playable:", creature_card.is_playable(available_mana))
     print("Play result: ", creature_card.play({}))
     print()
     print("Fire Dragon attacks Goblin Warrior:")

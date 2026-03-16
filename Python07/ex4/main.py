@@ -18,6 +18,7 @@ if __name__ == "__main__":
     print()
     platform = TournamentPlatform()
     print("Registering Tournament Cards...")
+    print()
     dragon = TournamentCard("Fire Dragon", 5, "Legendary", 7, 5,
                             "dragon_001", 1200)
     wizard = TournamentCard("Ice Wizard", 4, "Epic", 5, 4, "wizard_001", 1150)
@@ -41,7 +42,7 @@ if __name__ == "__main__":
     leaderboard = platform.get_leaderboard()
     for i, card in enumerate(leaderboard, 1):
         print(f"{i}. {card.name} - Rating: {card.calculate_rating()} "
-              "({card.wins}-{card.losses})")
+              f"({card.wins}-{card.losses})")
     print()
     print("Platform Report:")
     print(platform.generate_tournament_report())

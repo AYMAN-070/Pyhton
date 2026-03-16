@@ -14,16 +14,22 @@ from ex4.TournamentCard import TournamentCard
 
 
 class TournamentPlatform:
+    """Platform management system for registering cards and organizing
+    matches"""
 
-    def __init__(self):
-        self.cards = {}
+    def __init__(self) -> None:
+        """Initializes the platform with an empty card registry and match
+        counter"""
+        self.cards: dict[str, TournamentCard] = {}
         self.matches_played = 0
 
     def register_card(self, card: TournamentCard) -> str:
+        """Registers a card in the tournament system using its unique ID"""
         self.cards[card.card_id] = card
         return f"Card {card.name} registered successfully."
 
     def create_match(self, card1_id: str, card2_id: str) -> dict:
+        """Simulates a match between two registered cards"""
         fighter1 = self.cards.get(card1_id)
         fighter2 = self.cards.get(card2_id)
 
@@ -50,6 +56,7 @@ class TournamentPlatform:
         }
 
     def get_leaderboard(self) -> list:
+        """Returns a list of cards sorted by rating in descending order"""
         all_cards = list(self.cards.values())
 
         sorted_cards = sorted(all_cards, key=lambda x: x.rating, reverse=True)
@@ -57,6 +64,7 @@ class TournamentPlatform:
         return sorted_cards
 
     def generate_tournament_report(self) -> dict:
+        """Generates a summary report of the platform's current status"""
         ratings = [c.rating for c in self.cards.values()]
         avg_rating = sum(ratings) / len(ratings) if ratings else 0
 

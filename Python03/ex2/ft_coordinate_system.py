@@ -11,47 +11,71 @@
 # *************************************************************************** #
 
 import math
+import sys
+
+
+def calculate_distance(p1: tuple[float, ...], p2: tuple[float, ...]) -> float:
+    """Calculates Euclidean distance between two 3D points."""
+    return math.sqrt(sum((a - b) ** 2 for a, b in zip(p1, p2)))
+
+
 if __name__ == "__main__":
-    print("=== Game Coordinate System ===")
-    print()
-    print("Position created: (10, 20, 5)")
-    distance = math.sqrt((10 - 0)**2 + (20 - 0)**2 + (5 - 0)**2)
-    print(f"Distance between (0, 0, 0) and (10, 20, 5): {distance:.2f}")
-    print()
+    origin: tuple[int, int, int] = (0, 0, 0)
+    if len(sys.argv) == 1:
+        print("=== Game Coordinate System ===")
+        print()
+        pos1: tuple[int, int, int] = (10, 20, 5)
+        distance = calculate_distance(origin, pos1)
+        print(f"Position created: {pos1}")
+        print(f"Distance between {origin} and {pos1}: {distance:.2f}")
+        print()
 
-    print("Parsing coordinates: \"3,4,0\"")
-    input_str = "3,4,0"
-    data = input_str.split(",")
-    tmp = []
-    for num in data:
-        tmp.append(int(num))
-    coordinates = tuple(tmp)
-    print("parsed position: ", coordinates)
-    distance2 = math.sqrt((3 - 0)**2 + (4 - 0)**2)
-    print(f"Distance between (0, 0, 0) and (3, 4, 0): {distance2:.2f}")
-    print()
-
-    print("Parsing invalid coordinates: \"abc,def,ghi\"")
-    try:
-        input_str2 = "abc,def,ghi"
-        data = input_str2.split(",")
+        print("Parsing coordinates: \"3,4,0\"")
+        input_str = "3,4,0"
+        data = input_str.split(",")
         tmp = []
         for num in data:
-            tmp = int(num)
-        print("Parsing invalid coordinates: \"abc,def,ghi\"")
-        coordinates1 = tuple(tmp)
-        print("parsed position: ", coordinates1)
-        distance3 = math.sqrt((coordinates1[0] - 0)**2 + (coordinates1[1] - 0)
-                              ** 2 + (coordinates1[2] - 0)**2)
-        print(f"Distance between (0, 0, 0) and (3, 4, 0): {distance3:.2f}")
+            tmp.append(int(num))
+        coordinates = tuple(tmp)
+        print("Parsed position: ", coordinates)
+        distance2 = calculate_distance(coordinates, origin)
+        print(f"Distance between (0, 0, 0) and (3, 4, 0): {distance2:.1f}")
         print()
-    except ValueError as e:
-        print("Error parsing coordinates: invalid literal for int() with "
-              "base 10: 'abc")
-        print("Error details - Type: ValueError,  Args: ", e)
-    print()
 
-    print("Unpacking demonstration:")
-    x, y, z = coordinates
-    print(f"Player at x={x}, y={y}, z={z}")
-    print(f"Coordinates: x={x}, y={y}, z={z}")
+        print("Parsing invalid coordinates: \"abc,def,ghi\"")
+        try:
+            input_str2 = "abc,def,ghi"
+            data = input_str2.split(",")
+            tmp = []
+            for num in data:
+                tmp.append(int(num))
+            print("Parsing invalid coordinates: \"abc,def,ghi\"")
+            coordinates1 = tuple(tmp)
+            print("Parsed position: ", coordinates1)
+            distance3 = calculate_distance(coordinates1, origin)
+            print(f"Distance between {origin} and (3, 4, 0): {distance3:.2f}")
+            print()
+        except ValueError as e:
+            print("Error parsing coordinates: invalid literal for int() with "
+                  "base 10: 'abc")
+            print("Error details - Type: ValueError,  Args: ", e)
+        print()
+
+        print("Unpacking demonstration:")
+        x, y, z = coordinates
+        print(f"Player at x={x}, y={y}, z={z}")
+        print(f"Coordinates: x={x}, y={y}, z={z}")
+
+    if len(sys.argv) > 1:
+        try:
+            user_pos = sys.argv[1]
+            data = user_pos.split(",")
+            tmp = []
+            for num in data:
+                tmp.append(int(num))
+            coordinates3 = tuple(tmp)
+            dist = calculate_distance(coordinates3, origin)
+            print("Parsed position: ", coordinates3)
+            print(f"Distance between {origin} and {coordinates3}: {dist:.2f}")
+        except ValueError as e:
+            print("Error parsing coordinates:", e)

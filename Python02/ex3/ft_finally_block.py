@@ -10,7 +10,10 @@
 #                                                                             #
 # *************************************************************************** #
 
-def water_plants(plant_list):
+def water_plants(plant_list: list) -> None:
+    """
+    Simulates watering plants and ensures system closure via finally block.
+    """
     print("Opening watering system")
     i = 0
     try:
@@ -22,14 +25,17 @@ def water_plants(plant_list):
     except ValueError:
         print("Error: Cannot water None - invalid plant!")
     finally:
-        print("Closing watering system (cleanup)\n")
-        if i == len(plant_list):
-            print("Watering completed successfully!\n")
-        else:
-            print("Cleanup always happens, even with errors!")
+        print("Closing watering system (cleanup)")
+    if i == len(plant_list):
+        print("Watering completed successfully!\n")
+    else:
+        print("Cleanup always happens, even with errors!")
 
 
-def test_watering_system():
+def test_watering_system() -> None:
+    """
+    Demonstrates the resilience of the watering system.
+    """
     print("=== Garden Watering system ===")
     print()
     print("Testing normal watering...")

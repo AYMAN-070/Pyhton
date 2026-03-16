@@ -26,20 +26,23 @@ if __name__ == "__main__":
     strategy = AggressiveStrategy()
     print("Factory: ", factory.__class__.__name__)
     print("Strategy: ", strategy.__class__.__name__)
-    print("Available types: ", )
     print("Available types: ", factory.get_supported_types())
     print()
     print("Simulating aggressive turn...")
     hand = [factory.create_creature("dragon"),
             factory.create_creature("goblin"),
             factory.create_spell("lightning")]
-    dispaly = [f"{card.name} ({card.cost})" for card in hand]
-    print("Hand: ", dispaly)
+    display = []
+    for card in hand:
+        if card is not None:
+            display.append(f"{card.name} ({card.cost})")
+    print("Hand: ", display)
     print()
     print("Turn execution:")
     print("Strategy: ", strategy.get_strategy_name())
     result = strategy.execute_turn(hand, [])
     print("Actions: ", result)
+    print()
     print("Game Report:")
     report = {'turn_simulated': 1, 'strategy_used':
               strategy.get_strategy_name(),

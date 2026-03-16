@@ -10,31 +10,39 @@
 #                                                                             #
 # *************************************************************************** #
 
-if __name__ == "__main__":
-    print("=== CYBER ARCHIVES - CRISIS RESPONSE SYSTEM ===")
-    print()
-    print("CRISIS ALERT: Attempting access to 'lost_archive.txt'...")
+def crisis_handler(filename: str) -> None:
+    """Handles archive operations and manages failures gracefully.
+    """
+    if filename == "standard_archive.txt":
+        print(f"ROUTINE ACCESS: Attempting access to '{filename}'...")
+    else:
+        print(f"CRISIS ACCESS: Attempting access to '{filename}'...")
     try:
-        with open("lost_archive.txt", "r") as file:
-            print("ESPONSE: Archive found in storage matrix")
-    except FileNotFoundError:
-        print("RESPONSE: Archive not found in storage matrix")
-        print("STATUS: Crisis handled, system stable")
-    print()
-    print("CRISIS ALERT: Attempting access to 'classified_vault.txt'...")
-    try:
-        raise PermissionError
-    except PermissionError:
-        print("RESPONSE: Security protocols deny access")
-        print("STATUS: Crisis handled, security maintained")
-    print()
-    print("ROUTINE ACCESS: Attempting access to 'standard_archive.txt'...")
-    try:
-        with open("standard_archive.txt", "r") as file:
+        with open(filename, "r") as file:
             content = file.read()
             print(f"SUCCESS: Archive recovered - ''{content}''")
             print("STATUS: Normal operations resumed")
     except FileNotFoundError:
+        print("RESPONSE: Archive not found in storage matrix")
+        print("STATUS: Crisis handled, system stable")
+    except PermissionError:
         print("RESPONSE: Security protocols deny access")
+        print("STATUS: Crisis handled, security maintained")
+    except Exception:
+        print("RESPONSE: Unexpected system anomaly")
+        print("STATUS: Crisis handled, anomaly contained")
+
+
+def main() -> None:
+    print("=== CYBER ARCHIVES - CRISIS RESPONSE SYSTEM ===")
     print()
-    print("All crisis scenarios handled successfully. Archives secure.")
+    crisis_handler("lost_archive.txt")
+    print()
+    crisis_handler("classified_vault.txt")
+    print()
+    crisis_handler("standard_archive.txt")
+    print("\nAll crisis scenarios handled successfully. Archives secure.")
+
+
+if __name__ == "__main__":
+    main()
